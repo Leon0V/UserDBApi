@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LoginApi.Models.Users
+namespace TemplateApi.Models
 {
     public class RegUser
     {
@@ -13,6 +13,9 @@ namespace LoginApi.Models.Users
         [Required]
         [MinLength(6), MaxLength(40)]
         public string Name { get; set; } = string.Empty;
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime BirthDate { get; set; }
 
     }
 }

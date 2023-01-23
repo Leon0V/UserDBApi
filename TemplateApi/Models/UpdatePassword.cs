@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LoginApi.Models.Users
+namespace TemplateApi.Models
 {
     public class UpdatePassword
     {

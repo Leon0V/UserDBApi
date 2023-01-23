@@ -1,5 +1,7 @@
+//this sets the database.
+
 using Microsoft.EntityFrameworkCore;
-using Models;
+using TemplateApi.Models;
 
 namespace TemplateApi.Repositories
 {

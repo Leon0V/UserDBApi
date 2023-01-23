@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Services;
-using Models;
-using LoginApi.Models.Users;
+using TemplateApi.Models;
 
 namespace Controllers
 {
@@ -19,13 +14,37 @@ namespace Controllers
         {
             _userService = userService;
         }
+        //end of dependency injection
 
-
-        [HttpPost("register")]
-        public IActionResult Registrar(RegUser regUser){
-            return Ok(_userService.Post(regUser));
+        [HttpPost]
+        public IActionResult Register(RegUser regUser)
+        {
+            return Created("User Created: ", _userService.Post(regUser));
         }
 
+        [HttpGet]
+        public IActionResult List()
+        {
+            return Ok(_userService.Get());
+        }
 
+        [HttpGet("{id}")]
+        public IActionResult Search([FromRoute] int id)
+        {
+            return Ok(_userService.Search(id));
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put([FromRoute] int id, [FromBody] UpdateUser updateUser)
+        {
+            return Ok(_userService.Put(updateUser, id));
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            _userService.Delete(id);
+            return Ok();
+        }
     }
 }
