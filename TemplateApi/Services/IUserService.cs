@@ -1,4 +1,5 @@
 using TemplateApi.Models;
+
 namespace Services
 {
     public interface IUserService
@@ -8,5 +9,7 @@ namespace Services
         User Search(int id);
         User Put(UpdateUser updateUser, int id);
         void Delete(int id);
+
+        string Login(UserLogin userLogin);
     }
 }

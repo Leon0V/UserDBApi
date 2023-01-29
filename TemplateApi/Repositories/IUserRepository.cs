@@ -11,5 +11,7 @@ namespace TemplateApi.Repositories
         User? Search(int id);
         User Put(User user);
         void Delete(User user);
+
+        User? Search(string login);
     }
 }

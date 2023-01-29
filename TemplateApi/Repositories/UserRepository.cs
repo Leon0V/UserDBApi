@@ -41,5 +41,9 @@ namespace TemplateApi.Repositories
             _db.SaveChanges();
         }
 
+        public User? Search(string login)
+        {
+            return _db.users.FirstOrDefault(x => x.Login == login);
+        }
     }
 }

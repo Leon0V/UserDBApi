@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using TemplateApi.Models;
@@ -6,6 +7,7 @@ namespace Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         //dependency injection
@@ -17,6 +19,7 @@ namespace Controllers
         //end of dependency injection
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Register(RegUser regUser)
         {
             return Created("User Created: ", _userService.Post(regUser));

@@ -1,16 +1,20 @@
 using TemplateApi.Commons.Exceptions;
 using TemplateApi.Models;
 using TemplateApi.Repositories;
+using TemplateApi.Services;
 
 namespace Services
 {
     public class UserService : IUserService
     {
         private IUserRepository _repository;
-        public UserService(IUserRepository repository)
+        private ITokenService _tokenService;
+        public UserService(IUserRepository repository, ITokenService tokenService)
         {
             _repository = repository;
+            _tokenService = tokenService;
         }
+        
 
 
         public User Post(RegUser regUser)
@@ -53,6 +57,18 @@ namespace Services
         {   
             var searching = Search(id);
             _repository.Delete(searching);
+        }
+
+        public string Login(UserLogin userLogin)
+        {
+            var user = _repository.Search(userLogin.Login);
+            if(user == null)
+                throw new Exception("User not Authorized");
+            if(userLogin.Password != user.Password)
+                throw new Exception("User not Authorized");
+            
+            return _tokenService.GenerateToken(user);
+            
         }
     }
 }
